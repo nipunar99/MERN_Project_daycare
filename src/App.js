@@ -12,6 +12,12 @@ import EventList from "./components/Event-list.component";
 import Report from "./components/Report";
 
 
+//Import appoinment 
+import AppointmentList from "./components/appointment-list.component";
+import EditAppointment from "./components/edit-appointment.component";
+import CreateAppointment from "./components/create-appointment.component";
+
+
 // Import files of Child
 
 import EditChild from "./components/childComponents/editChild.component";
@@ -36,11 +42,14 @@ function App() {
         <Route path="/child" component={ListChild}/>
         <Route path="/child/update/:id" component={EditChild}/>
         <Route path="/child/create" component={AddChild}/>
-        
 
         {/*Routes for Teachers */}
 
         {/*Routes for Applications */}
+        <Route path="/appointment" component={AppointmentList} />
+        <Route path="/appointment/edit/:id" component={EditAppointment} />
+        <Route path="/appointment/create" component={CreateAppointment} />
+
 
 
       </div>{" "}

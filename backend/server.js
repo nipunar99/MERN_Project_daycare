@@ -35,6 +35,9 @@ app.use(ChildRouter);
 const Teacher_Router = require("./routes/TeacherRoutes");
 app.use(Teacher_Router);
 
+const Appointment_Router = require("./routes/AppointmentRoutes");
+app.use(Appointment_Router);
+
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });

@@ -59,9 +59,9 @@ router.route("/gardian/update/:id").post((req, res) => {
       
       Event.save()
         .then(() => res.json("Event updated!"))
-        .catch((err) => res.status(400).json("Error: " + err));
+        .catch((err) => res.status(400).json("Error : " + err));
     })
-    .catch((err) => res.status(400).json("Error: " + err));
+    .catch((err) => res.status(400).json("Error : " + err));
 });
 
 module.exports = router;

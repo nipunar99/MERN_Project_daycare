@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
+import swal from "@sweetalert/with-react";
 
-export default class EditEvent extends Component {
+export default class CreateAppointment extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeGid = this.onChangeGid.bind(this);
+    this.onChangeAid = this.onChangeAid.bind(this);
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeAddress = this.onChangeAddress.bind(this);
     this.onChangePno = this.onChangePno.bind(this);
@@ -15,54 +16,24 @@ export default class EditEvent extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      Gid: "",
+      Aid: "",
       Name: "",
       Age: "",
       Address: "",
       Pno: "",
       Childres: "",
-      Event: [],
+      Appointment: [],
     };
   }
 
-  componentDidMount() {
-    axios
-      .get("http://localhost:5000/gardian/" + this.props.match.params.id)
-      .then((response) => {
-        this.setState({
-          Gid: response.data.Gid,
-          Name: response.data.Name,
-          Age: response.data.Age,
-          Address: response.data.Address,
-          Pno: response.data.Pno,
-          Children: response.data.Children,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-    axios
-      .get("http://localhost:5000/gardian")
-      .then((response) => {
-        if (response.data.length > 0) {
-          this.setState({
-            Event: response.data.map((Event) => Event.CompanyName),
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-  //set the EventID
-  onChangeGid(e) {
+  //set the AppointmentID
+  onChangeAid(e) {
     this.setState({
-      Gid: e.target.value,
+      Aid: e.target.value,
     });
   }
 
-  //set the EventName
+  //set the AppointmentName
   onChangeName(e) {
     this.setState({
       Name: e.target.value,
@@ -90,7 +61,7 @@ export default class EditEvent extends Component {
     });
   }
 
-  //set age
+  //set Age
   onChangeAge(e) {
     this.setState({
       Age: e.target.value,
@@ -101,8 +72,8 @@ export default class EditEvent extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const Event = {
-      Gid: this.state.Gid,
+    const Appointment = {
+      Aid: this.state.Aid,
       Name: this.state.Name,
       Age: this.state.Age,
       Address: this.state.Address,
@@ -110,16 +81,22 @@ export default class EditEvent extends Component {
       Children: this.state.Children,
     };
 
-    console.log(Event);
+    console.log(Appointment);
+
+    //validation **************************************************************
 
     axios
-      .post(
-        "http://localhost:5000/gardian/update/" + this.props.match.params.id,
-        Event
-      )
+      .post("http://localhost:5000/appointment/add", Appointment)
       .then((res) => console.log(res.data));
-    alert("Edit Successfully");
-    window.location = "/gardian";
+
+    swal({
+      title: "Done!",
+      text: "Appointment Successfully Added",
+      icon: "success",
+      button: "Okay!",
+    }).then((value) => {
+      window.location = "/appointment";
+    });
   }
 
   render() {
@@ -127,9 +104,10 @@ export default class EditEvent extends Component {
       <div>
         <div class="row">
           <div class="col-6">
-            <br /> <br /> <br /> <br /> <br /> <br />
+            <br />
+            <br />
             <img
-              src="https://www.zestinfotech.in/wp-content/uploads/2020/07/acf1fs403asa627af854f143dfsc7f65f3efd7ddcf53ae.gif"
+              src="https://s3-eu-west-1.amazonaws.com/poptop-wp/blog/wp-content/uploads/2018/02/15113845/1st-shot-2.gif"
               width="90%"
               height="60% "
             />
@@ -140,33 +118,33 @@ export default class EditEvent extends Component {
                 <div className="col-md-8 mt-4 mx-auto"> </div>
                 <h3 className="text-center">
                   <font face="Comic sans MS" size="6">
-                    Edit Gardian Details
+                    Add a Appointment
                   </font>{" "}
                 </h3>
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
-                      <label> Gardian ID : </label>
-                      <input
-                        type="Number"
-                        required
-                        className="form-control"
-                        placeholder="Enter an ID"
-                        value={this.state.Gid}
-                        onChange={this.onChangeGid}
-                      />
-                    </div>
-                      <div className="form-group">
-                      <label> Name : </label>
-                      <input
-                        type="text"
-                        required
-                        className="form-control"
-                        placeholder="Enter Name"
-                        value={this.state.Name}
-                        onChange={this.onChangeName}
-                      />{" "}
-                    </div>
-                    <div className="form-group">
+                    <label> Appointment ID: </label>
+                    <input
+                      type="Number"
+                      required
+                      className="form-control"
+                      placeholder="Enter an ID"
+                      value={this.state.Aid}
+                      onChange={this.onChangeAid}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label> Name: </label>
+                    <input
+                      type="text"
+                      required
+                      className="form-control"
+                      placeholder="Enter Name"
+                      value={this.state.Name}
+                      onChange={this.onChangeName}
+                    />{" "}
+                  </div>
+                  <div className="form-group">
                     <label> Age : </label>
                     <input
                       type="text"
@@ -212,7 +190,6 @@ export default class EditEvent extends Component {
                       onChange={this.onChangeChildren}
                     />{" "}
                   </div>
-                  
                   <div className="form-group">
                     <input
                       type="submit"

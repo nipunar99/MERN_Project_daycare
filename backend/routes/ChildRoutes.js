@@ -25,29 +25,23 @@ router.route("/child/add").post((req,res)=>{
 })
 
 //UPDATE
-router.route("/child/update/:id").put((req,res) => {
-    const childId = req.params.id;
-    const {Cid,Name,Age,Gender,Address,SpecialNotes,Gid} = req.body;
-
-    const updateChild = new child({
-        Cid,
-        Name,
-        Age,
-        Gender,
-        Address,
-        SpecialNotes,
-        Gid
-    });
-
-
-    const update = child.findByIdAndUpdate(childId,updateChild)
-    .then(()=>{
-        res.json("Child Updated!")
-        console.log(update)
-    }).catch((err)=>{
-        res.status(400).json("Error: "+err);
-    })
-})
+router.route("/child/update/:id").post((req, res) => {
+    Guardian.findById(req.params.id)
+      .then((Event) => {
+        Event.Cid = req.body.Gid;
+        Event.Name = req.body.Name;
+        Event.Age = req.body.Age;
+        Event.Gender = req.body.Gender;
+        Event.Address = req.body.Address;
+        Event.SpecialNotes = req.body.SpecialNotes;
+        Event.Gid = req.body.Gid;
+        
+        Event.save()
+          .then(() => res.json("Event updated!"))
+          .catch((err) => res.status(400).json("Error : " + err));
+      })
+      .catch((err) => res.status(400).json("Error : " + err));
+  });
 
 //DELETE
 router.route("/child/delete/:id").delete((req,res)=>{

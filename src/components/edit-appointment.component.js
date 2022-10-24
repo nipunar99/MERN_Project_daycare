@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default class EditEvent extends Component {
+export default class EditAppointment extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeGid = this.onChangeGid.bind(this);
+    this.onChangeAid = this.onChangeAid.bind(this);
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeAddress = this.onChangeAddress.bind(this);
     this.onChangePno = this.onChangePno.bind(this);
@@ -15,22 +15,22 @@ export default class EditEvent extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      Gid: "",
+      Aid: "",
       Name: "",
       Age: "",
       Address: "",
       Pno: "",
       Childres: "",
-      Event: [],
+      Appointment: [],
     };
   }
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/gardian/" + this.props.match.params.id)
+      .get("http://localhost:5000/appointment/" + this.props.match.params.id)
       .then((response) => {
         this.setState({
-          Gid: response.data.Gid,
+          Aid: response.data.Aid,
           Name: response.data.Name,
           Age: response.data.Age,
           Address: response.data.Address,
@@ -43,11 +43,11 @@ export default class EditEvent extends Component {
       });
 
     axios
-      .get("http://localhost:5000/gardian")
+      .get("http://localhost:5000/appointment")
       .then((response) => {
         if (response.data.length > 0) {
           this.setState({
-            Event: response.data.map((Event) => Event.CompanyName),
+            Appointment: response.data.map((Appointment) => Appointment.CompanyName),
           });
         }
       })
@@ -55,14 +55,14 @@ export default class EditEvent extends Component {
         console.log(error);
       });
   }
-  //set the EventID
-  onChangeGid(e) {
+  //set the AppointmentID
+  onChangeAid(e) {
     this.setState({
-      Gid: e.target.value,
+      Aid: e.target.value,
     });
   }
 
-  //set the EventName
+  //set the AppointmentName
   onChangeName(e) {
     this.setState({
       Name: e.target.value,
@@ -101,8 +101,8 @@ export default class EditEvent extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const Event = {
-      Gid: this.state.Gid,
+    const Appointment = {
+      Aid: this.state.Aid,
       Name: this.state.Name,
       Age: this.state.Age,
       Address: this.state.Address,
@@ -110,16 +110,16 @@ export default class EditEvent extends Component {
       Children: this.state.Children,
     };
 
-    console.log(Event);
+    console.log(Appointment);
 
     axios
       .post(
-        "http://localhost:5000/gardian/update/" + this.props.match.params.id,
-        Event
+        "http://localhost:5000/appointment/update/" + this.props.match.params.id,
+        Appointment
       )
       .then((res) => console.log(res.data));
     alert("Edit Successfully");
-    window.location = "/gardian";
+    window.location = "/appointment";
   }
 
   render() {
@@ -140,23 +140,23 @@ export default class EditEvent extends Component {
                 <div className="col-md-8 mt-4 mx-auto"> </div>
                 <h3 className="text-center">
                   <font face="Comic sans MS" size="6">
-                    Edit Gardian Details
+                    Edit Appointment Details
                   </font>{" "}
                 </h3>
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
-                      <label> Gardian ID : </label>
+                      <label> Appointment ID: </label>
                       <input
                         type="Number"
                         required
                         className="form-control"
                         placeholder="Enter an ID"
-                        value={this.state.Gid}
-                        onChange={this.onChangeGid}
+                        value={this.state.Aid}
+                        onChange={this.onChangeAid}
                       />
                     </div>
                       <div className="form-group">
-                      <label> Name : </label>
+                      <label> Name: </label>
                       <input
                         type="text"
                         required
