@@ -2,9 +2,8 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-//Databass Schema
-
-const EventSchema = new Schema(
+//Database Schema
+const GuardianSchema = new Schema(
   {
     Gid: { type: Number, required: true },
     Name: { type: String, required: true },
@@ -18,6 +17,6 @@ const EventSchema = new Schema(
   }
 );
 
-const Event = mongoose.model("Event", EventSchema);
+const Guardian = mongoose.model("Guardian", GuardianSchema);
 
-module.exports = Event;
+module.exports = Guardian;

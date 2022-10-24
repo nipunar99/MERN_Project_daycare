@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
-import swal from "@sweetalert/with-react"
 
-export default class CreateEvent extends Component {
+export default class EditEvent extends Component {
   constructor(props) {
     super(props);
 
@@ -26,6 +25,36 @@ export default class CreateEvent extends Component {
     };
   }
 
+  componentDidMount() {
+    axios
+      .get("http://localhost:5000/gardian/" + this.props.match.params.id)
+      .then((response) => {
+        this.setState({
+          Gid: response.data.Gid,
+          Name: response.data.Name,
+          Age: response.data.Age,
+          Address: response.data.Address,
+          Pno: response.data.Pno,
+          Children: response.data.Children,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    axios
+      .get("http://localhost:5000/gardian")
+      .then((response) => {
+        if (response.data.length > 0) {
+          this.setState({
+            Event: response.data.map((Event) => Event.CompanyName),
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   //set the EventID
   onChangeGid(e) {
     this.setState({
@@ -61,7 +90,7 @@ export default class CreateEvent extends Component {
     });
   }
 
-  //set Age
+  //set age
   onChangeAge(e) {
     this.setState({
       Age: e.target.value,
@@ -83,20 +112,14 @@ export default class CreateEvent extends Component {
 
     console.log(Event);
 
-    //validation **************************************************************
-
     axios
-      .post("http://localhost:5000/gardian/add", Event)
+      .post(
+        "http://localhost:5000/gardian/update/" + this.props.match.params.id,
+        Event
+      )
       .then((res) => console.log(res.data));
-
-    swal({
-      title: "Done!",
-      text: "Event Successfully Added",
-      icon: "success",
-      button: "Okay!",
-    }).then((value) => {
-      window.location = "/gardian";
-    });
+    alert("Edit Successfully");
+    window.location = "/gardian";
   }
 
   render() {
@@ -104,10 +127,9 @@ export default class CreateEvent extends Component {
       <div>
         <div class="row">
           <div class="col-6">
-            <br />
-            <br />
+            <br /> <br /> <br /> <br /> <br /> <br />
             <img
-              src="https://s3-eu-west-1.amazonaws.com/poptop-wp/blog/wp-content/uploads/2018/02/15113845/1st-shot-2.gif"
+              src="https://www.zestinfotech.in/wp-content/uploads/2020/07/acf1fs403asa627af854f143dfsc7f65f3efd7ddcf53ae.gif"
               width="90%"
               height="60% "
             />
@@ -118,33 +140,33 @@ export default class CreateEvent extends Component {
                 <div className="col-md-8 mt-4 mx-auto"> </div>
                 <h3 className="text-center">
                   <font face="Comic sans MS" size="6">
-                    Add a Gardian
+                    Edit Gardian Details
                   </font>{" "}
                 </h3>
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
-                    <label> Gardian ID: </label>
-                    <input
-                      type="Number"
-                      required
-                      className="form-control"
-                      placeholder="Enter an ID"
-                      value={this.state.Gid}
-                      onChange={this.onChangeGid}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label> Name: </label>
-                    <input
-                      type="text"
-                      required
-                      className="form-control"
-                      placeholder="Enter Name"
-                      value={this.state.Name}
-                      onChange={this.onChangeName}
-                    />{" "}
-                  </div>
-                  <div className="form-group">
+                      <label> Gardian ID: </label>
+                      <input
+                        type="Number"
+                        required
+                        className="form-control"
+                        placeholder="Enter an ID"
+                        value={this.state.Gid}
+                        onChange={this.onChangeGid}
+                      />
+                    </div>
+                      <div className="form-group">
+                      <label> Name: </label>
+                      <input
+                        type="text"
+                        required
+                        className="form-control"
+                        placeholder="Enter Name"
+                        value={this.state.Name}
+                        onChange={this.onChangeName}
+                      />{" "}
+                    </div>
+                    <div className="form-group">
                     <label> Age : </label>
                     <input
                       type="text"
@@ -190,6 +212,7 @@ export default class CreateEvent extends Component {
                       onChange={this.onChangeChildren}
                     />{" "}
                   </div>
+                  
                   <div className="form-group">
                     <input
                       type="submit"

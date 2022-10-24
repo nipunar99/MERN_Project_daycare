@@ -1,8 +1,8 @@
 const router = require("express").Router();
-let Event = require("../models/Gardian_Model");
+let Guardian = require("../models/Gardian_Model");
 
 router.route("/gardian").get((req, res) => {
-  Event.find()
+  Guardian.find()
     .then((Event) => res.json(Event))
     .catch((err) => res.status(400).json("Error: " + err));
 });
@@ -16,7 +16,7 @@ router.route("/gardian/add").post((req, res) => {
   const Pno = req.body.Pno;
   const Children = req.body.Children;
 
-  const newEvent = new Event({
+  const newEvent = new Guardian({
     Gid,
     Name,
     Age,
@@ -33,7 +33,7 @@ router.route("/gardian/add").post((req, res) => {
 
 // Get Data
 router.route("/gardian/:id").get((req, res) => {
-  Event.findById(req.params.id)
+  Guardian.findById(req.params.id)
     .then((Event) => res.json(Event))
     .catch((err) => res.status(400).json("Error: " + err));
 });
@@ -41,14 +41,14 @@ router.route("/gardian/:id").get((req, res) => {
 //Delete Data
 
 router.route("/gardian/delelte/:id").delete((req, res) => {
-  Event.findByIdAndDelete(req.params.id)
+  Guardian.findByIdAndDelete(req.params.id)
     .then(() => res.json("Event deleted."))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
 // Update data
 router.route("/gardian/update/:id").post((req, res) => {
-  Event.findById(req.params.id)
+  Guardian.findById(req.params.id)
     .then((Event) => {
       Event.Gid = req.body.Gid;
       Event.Name = req.body.Name;

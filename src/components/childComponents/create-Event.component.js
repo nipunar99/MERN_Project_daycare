@@ -3,11 +3,11 @@ import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import swal from "@sweetalert/with-react"
 
-export default class CreateEvent extends Component {
+export default class AddChild extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeGid = this.onChangeGid.bind(this);
+    this.onChangeCid = this.onChangeCid.bind(this);
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeAddress = this.onChangeAddress.bind(this);
     this.onChangePno = this.onChangePno.bind(this);
@@ -16,7 +16,7 @@ export default class CreateEvent extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      Gid: "",
+      Cid: "",
       Name: "",
       Age: "",
       Address: "",
@@ -27,9 +27,9 @@ export default class CreateEvent extends Component {
   }
 
   //set the EventID
-  onChangeGid(e) {
+  onChangeCid(e) {
     this.setState({
-      Gid: e.target.value,
+      Cid: e.target.value,
     });
   }
 
@@ -73,7 +73,7 @@ export default class CreateEvent extends Component {
     e.preventDefault();
 
     const Event = {
-      Gid: this.state.Gid,
+      Cid: this.state.Cid,
       Name: this.state.Name,
       Age: this.state.Age,
       Address: this.state.Address,
@@ -129,8 +129,8 @@ export default class CreateEvent extends Component {
                       required
                       className="form-control"
                       placeholder="Enter an ID"
-                      value={this.state.Gid}
-                      onChange={this.onChangeGid}
+                      value={this.state.Cid}
+                      onChange={this.onChangeCid}
                     />
                   </div>
                   <div className="form-group">
