@@ -3,17 +3,17 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 
-const Event = (props) => (
+const Child = (props) => (
   <tr>
-    <td> {props.Event.Gid} </td> <td> {props.Event.Name} </td>{" "}
-    <td> {props.Event.Age} </td> <td> {props.Event.Address} </td>{" "}
-    <td> {props.Event.Pno} </td> <td> {props.Event.Children} </td>{" "}
+    <td> {props.Child.Cid} </td> <td> {props.Child.Name} </td>{" "}
+    <td> {props.Child.Age} </td> <td> {props.Child.Gender} </td>{" "}
+    <td> {props.Child.Address} </td> <td> {props.Child.SpecialNotes} </td>{" "}
     <td>
-      <Link to={"/gardian/edit/" + props.Event._id}> Edit </Link> |{" "}
+      <Link to={"/child/update/" + props.Child._id}> Edit </Link> |{" "}
       <a
         href=" "
         onClick={() => {
-          props.deleteEvent(props.Event._id);
+          props.deleteChild(props.Child._id);
         }}
       >
         Delete
@@ -22,20 +22,20 @@ const Event = (props) => (
   </tr>
 );
 
-export default class EventList extends Component {
+export default class ChildList extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      Event: [],
+      Child: [],
     };
   }
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/gardian")
+      .get("http://localhost:5000/child")
       .then((response) => {
-        this.setState({ Event: response.data });
+        this.setState({ Child: response.data });
       })
       .catch((error) => {
         console.log(error);
@@ -44,56 +44,56 @@ export default class EventList extends Component {
 
   getPosts() {
     axios
-      .get("http://localhost:5000/gardian")
+      .get("http://localhost:5000/child")
       .then((response) => {
-        this.setState({ Event: response.data });
+        this.setState({ Child: response.data });
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
-  deleteEvent(id) {
+  deleteChild(id) {
     if (window.confirm("Are you sure?")) {
-      axios.delete("http://localhost:5000/gardian/delelte/" + id).then((response) => {
+      axios.delete("http://localhost:5000/child/delete/" + id).then((response) => {
         console.log(response.data);
       });
 
       this.setState({
-        Event: this.state.Event.filter((el) => el._id !== id),
+        Child: this.state.Child.filter((el) => el._id !== id),
       });
     }
   }
 
-  EventList() {
-    return this.state.Event.map((currentEvent) => {
+  ChildList() {
+    return this.state.Child.map((currentChild) => {
       return (
-        <Event
-          Event={currentEvent}
-          deleteEvent={this.deleteEvent}
-          key={currentEvent._id}
+        <Child
+          Child={currentChild}
+          deleteChild={this.deleteChild}
+          key={currentChild._id}
         />
       );
     });
   }
 
-  //searchKey by Event Name
-  filterData(Event, searchKey) {
+  //searchKey by Child Name
+  filterData(Child, searchKey) {
     this.setState({
-      Event: this.state.Event.filter((el) => (el.EventName = searchKey)),
+      Child: this.state.Child.filter((el) => (el.ChildName = searchKey)),
     });
   }
 
   handleSearchArea = (e) => {
     const searchKey = e.currentTarget.value;
 
-    axios.get("http://localhost:5000/gardian").then((response) => {
+    axios.get("http://localhost:5000/child").then((response) => {
       const resultt = response.data;
       const result = resultt.filter((props) =>
-        props.EventName.includes(searchKey)
+        props.ChildName.includes(searchKey)
       );
 
-      this.setState({ Event: result });
+      this.setState({ Child: result });
     });
   };
 
@@ -103,13 +103,13 @@ export default class EventList extends Component {
         <div style={{ float: "none" }}></div> <br />
         <div className="row">
           <div className="col-lg-9 mt-2 mb-2">
-            <h4> All Gardians </h4>{" "}
+            <h4> All Children </h4>{" "}
           </div>{" "}
           <div className="col-lg-3 mt-2 mb-2">
             <input
               className="form-control"
               type="search"
-              placeholder="Search by Gardian Name"
+              placeholder="Search by Child Name"
               name="searchQuery"
               onChange={this.handleSearchArea}
             ></input>{" "}
@@ -118,31 +118,31 @@ export default class EventList extends Component {
         <table class="table table-bordered table-white">
           <thead className="thead-light">
             <tr>
-              <th> Gardian ID </th> <th> Gardian Name </th>{" "}
+              <th> Child ID </th> <th> Child Name </th>{" "}
               <th> Age </th> {" "}
-              <th> Address </th> <th> Phone No </th>{" "}
-              <th> Child Names </th>
+              <th> Gender </th> <th> Address </th>{" "}
+              <th> Special Notes </th>
               <th> Actions </th>{" "}
             </tr>{" "}
           </thead>{" "}
           <tbody>
-            {this.state.Event.map((props) => (
-              <tr key={props.Gid}>
-                <td> {props.Gid} </td>
+            {this.state.Child.map((props) => (
+              <tr key={props.Cid}>
+                <td> {props.Cid} </td>
                 <td> {props.Name} </td>
                 <td> {props.Age} </td>
+                <td> {props.Gender} </td>
                 <td> {props.Address} </td>
-                <td> {props.Pno} </td>
-                <td> {props.Children} </td>
+                <td> {props.SpecialNotes} </td>
                 <td>
-                  <Link to={"/gardian/edit/" + props._id}>
+                  <Link to={"/child/update/" + props._id}>
                     {" "}
                     <Button variant="warning btn-sm"> Edit </Button>{" "}
                   </Link>
                   <a
                     href=""
                     onClick={() => {
-                      this.deleteEvent(props._id);
+                      this.deleteChild(props._id);
                     }}
                   >
                     {" "}
@@ -154,9 +154,9 @@ export default class EventList extends Component {
           </tbody>{" "}
         </table>
         <div style={{ float: "right" }}>
-          <Link to="/gardian/create">
+          <Link to="/child/create">
             <button type="button" class="btn btn-success" variant="primary">
-              New Event
+              New Child
             </button>
           </Link>
         </div>

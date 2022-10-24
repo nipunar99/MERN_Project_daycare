@@ -25,7 +25,7 @@ router.route("/child/add").post((req,res)=>{
 })
 
 //UPDATE
-router.route("/update/:id").put((req,res) => {
+router.route("/child/update/:id").put((req,res) => {
     const childId = req.params.id;
     const {Cid,Name,Age,Gender,Address,SpecialNotes,Gid} = req.body;
 
@@ -50,7 +50,7 @@ router.route("/update/:id").put((req,res) => {
 })
 
 //DELETE
-router.route("/delete/:id").delete((req,res)=>{
+router.route("/child/delete/:id").delete((req,res)=>{
     const childId = req.params.id;
 
     child.findByIdAndDelete(childId)

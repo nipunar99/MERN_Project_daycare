@@ -12,6 +12,13 @@ import EventList from "./components/Event-list.component";
 import Report from "./components/Report";
 
 
+// Import files of Child
+
+import EditChild from "./components/childComponents/editChild.component";
+import AddChild from "./components/childComponents/addChild.component";
+import ListChild from "./components/childComponents/listChild.component";
+
+
 function App() {
   return (
     <Router>
@@ -26,6 +33,10 @@ function App() {
         <Route path="/gardian/Report" component={Report} />
 
         {/*Routes for Children */}
+        <Route path="/child" component={ListChild}/>
+        <Route path="/child/update/:id" component={EditChild}/>
+        <Route path="/child/create" component={AddChild}/>
+        
 
         {/*Routes for Teachers */}
 

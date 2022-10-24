@@ -3,7 +3,7 @@ let Guardian = require("../models/Gardian_Model");
 
 router.route("/gardian").get((req, res) => {
   Guardian.find()
-    .then((Event) => res.json(Event))
+    .then((Guardian) => res.json(Guardian))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
