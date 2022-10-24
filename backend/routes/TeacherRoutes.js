@@ -25,7 +25,7 @@ router.route("/teacher/add").post((req,res)=>{
 })
 
 //UPDATE
-router.route("/update/:id").put((req,res) => {
+router.route("/teacher/update/:id").put((req,res) => {
     const teacherId = req.params.id;
     const {Tid,Name,Age,Gender,Address,Qualification,GroupNo} = req.body;
 
@@ -45,12 +45,12 @@ router.route("/update/:id").put((req,res) => {
         res.json("Teacher Updated!")
         console.log(update)
     }).catch((err)=>{
-        res.status(400).json("Error: "+err);
+        res.status(400).json("ErroR: "+err);
     })
 })
 
 //DELETE
-router.route("/delete/:id").delete((req,res)=>{
+router.route("/teacher/delete/:id").delete((req,res)=>{
     const teacherId = req.params.id;
 
     teacher.findByIdAndDelete(teacherId)
@@ -72,7 +72,7 @@ router.route("/teacher").get((req,res)=>{
 
 router.route("/teacher/:id").get((req, res) => {
     teacher.findById(req.params.id)
-      .then((Event) => res.json(Event))
+      .then((teacher) => res.json(teacher))
       .catch((err) => res.status(400).json("Error: " + err));
   });
 
