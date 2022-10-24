@@ -13,7 +13,6 @@ export default class EditTeacher extends Component {
     this.onChangeAddress = this.onChangeAddress.bind(this);
     this.onChangeQualification = this.onChangeQualification.bind(this);
     this.onChangeGroupNo = this.onChangeGroupNo.bind(this);
-
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
@@ -21,7 +20,7 @@ export default class EditTeacher extends Component {
       Name: "",
       Age: "",
       Gender: "",
-      Address: "",
+      Address: "", 
       Qualification: "",
       GroupNo: "",
       Teacher: [],
@@ -39,7 +38,7 @@ export default class EditTeacher extends Component {
           Gender: response.data.Gender,
           Address: response.data.Address,
           Qualification: response.data.Qualification,
-          GroupNo: response.data.GroupNo
+          GroupNo: response.data.GroupNo,
         });
       })
       .catch(function (error) {
@@ -51,7 +50,7 @@ export default class EditTeacher extends Component {
       .then((response) => {
         if (response.data.length > 0) {
           this.setState({
-            Teacher: response.data.map((Teacher) => Teacher.CompanyName),
+            Child: response.data.map((Child) => Child.Name),
           });
         }
       })
@@ -60,59 +59,60 @@ export default class EditTeacher extends Component {
       });
   }
 
-    //set teacher id
-    onChangeTid(e) {
-      this.setState({
-        Tid: e.target.value,
-      });
-    }
-  
-    //set teacher name
-    onChangeName(e) {
-      this.setState({
-        Name: e.target.value,
-      });
-    }
-  
-    //set Age
-    onChangeAge(e) {
-      this.setState({
-        Age: e.target.value,
-      });
-    }
-  
-    //set Gender
-    onChangeGender(e) {
-      this.setState({
-        Gender: e.target.value,
-      });
-    }
-    //set Category
-    onChangeAddress(e) {
-      this.setState({
-        Address: e.target.value,
-      });
-    }
-  
-    //Set Qualifications
-    onChangeQualification(e) {
-      this.setState({
-        Qualification: e.target.value,
-      });
-    }
-  
-      //Set Group number
-    onChangeGroupNo(e) {
-      this.setState({
-        GroupNo: e.target.value,
-      });
-    }
-  
+  //set the Child ID
+  onChangeTid(e) {
+    this.setState({
+      Tid: e.target.value,
+    });
+  }
+
+  //set the Child Name
+  onChangeName(e) {
+    this.setState({
+      Name: e.target.value,
+    });
+  }
+
+  //set Child's Age
+  onChangeAge(e){
+    this.setState({
+      Age: e.target.value,
+    });
+  }
+
+  //set Child Address
+  onChangeAddress(e) {
+    this.setState({
+      Address: e.target.value,
+    });
+  }
+
+  //set Special notes
+  onChangeQualification(e) {
+    this.setState({
+      Qualification: e.target.value,
+    });
+  }
+
+  //Set Gender
+  onChangeGender(e) {
+    this.setState({
+      Gender: e.target.value,
+    });
+  }
+
+  //set Guardian ID
+  onChangeGroupNo(e) {
+    this.setState({
+      GroupNo: e.target.value,
+    });
+  }
+
   //submit Function
   onSubmit(e) {
     e.preventDefault();
 
-    const Teacher = {
+    const Child = {
       Tid: this.state.Tid,
       Name: this.state.Name,
       Age: this.state.Age,
@@ -122,12 +122,12 @@ export default class EditTeacher extends Component {
       GroupNo: this.state.GroupNo,
     };
 
-    console.log(Teacher);
+    console.log(Child);
 
     axios
       .post(
         "http://localhost:5000/teacher/update/" + this.props.match.params.id,
-        Teacher
+        Child
       )
       .then((res) => console.log(res.data));
     alert("Edit Successfull");
@@ -265,3 +265,5 @@ export default class EditTeacher extends Component {
     );
   }
 }
+
+

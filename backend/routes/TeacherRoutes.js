@@ -45,7 +45,7 @@ router.route("/teacher/update/:id").put((req,res) => {
         res.json("Teacher Updated!")
         console.log(update)
     }).catch((err)=>{
-        res.status(400).json("Error: "+err);
+        res.status(400).json("ErroR: "+err);
     })
 })
 
@@ -72,7 +72,7 @@ router.route("/teacher").get((req,res)=>{
 
 router.route("/teacher/:id").get((req, res) => {
     teacher.findById(req.params.id)
-      .then((Event) => res.json(Event))
+      .then((teacher) => res.json(teacher))
       .catch((err) => res.status(400).json("Error: " + err));
   });
 
