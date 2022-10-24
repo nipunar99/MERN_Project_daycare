@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
-//Databass Schema
-
+//DataBase Schema
 const TeacherSchema = new Schema(
   {
     Tid: { type: Number, required: true },
@@ -14,6 +12,7 @@ const TeacherSchema = new Schema(
     Qualification: {type: String, required: false},
     GroupNo: { type: Number, required: true },
   },
+
   {
     timestamps: true,
   }
@@ -21,4 +20,5 @@ const TeacherSchema = new Schema(
 
 const Teacher = mongoose.model("teacher", TeacherSchema);
 
+//export
 module.exports = Teacher;
