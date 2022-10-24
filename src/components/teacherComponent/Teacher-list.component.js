@@ -3,21 +3,21 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 
-const Event = (props) => (
+const Teacher = (props) => (
   <tr>
-    <td> {props.Event.Tid} </td> 
-    <td> {props.Event.Name} </td>{" "}
-    <td> {props.Event.Age} </td> 
-    <td> {props.Event.Gender} </td>{" "}
-    <td> {props.Event.Address} </td> 
-    <td> {props.Event.Qualification} </td>{" "}
-    <td> {props.Event.GroupNo} </td>
+    <td> {props.Teacher.Tid} </td> 
+    <td> {props.Teacher.Name} </td>{" "}
+    <td> {props.Teacher.Age} </td> 
+    <td> {props.Teacher.Gender} </td>{" "}
+    <td> {props.Teacher.Address} </td> 
+    <td> {props.Teacher.Qualification} </td>{" "}
+    <td> {props.Teacher.GroupNo} </td>
     <td>
-      <Link to={"/gardian/edit/" + props.Event._id}> Edit </Link> |{" "}
+      <Link to={"/teacher/update/" + props.Teacher._id}> Edit </Link> |{" "}
       <a
         href=" "
         onClick={() => {
-          props.deleteEvent(props.Event._id);
+          props.deleteTeacher(props.Teacher._id);
         }}
       >
         Delete
@@ -26,20 +26,20 @@ const Event = (props) => (
   </tr>
 );
 
-export default class EventList extends Component {
+export default class TeacherList extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      Event: [],
+      Teacher: [],
     };
   }
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/gardian")
+      .get("http://localhost:5000/teacher")
       .then((response) => {
-        this.setState({ Event: response.data });
+        this.setState({ Teacher: response.data });
       })
       .catch((error) => {
         console.log(error);
@@ -48,56 +48,56 @@ export default class EventList extends Component {
 
   getPosts() {
     axios
-      .get("http://localhost:5000/gardian")
+      .get("http://localhost:5000/teacher")
       .then((response) => {
-        this.setState({ Event: response.data });
+        this.setState({ Teacher: response.data });
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
-  deleteEvent(id) {
+  deleteTeacher(id) {
     if (window.confirm("Are you sure?")) {
-      axios.delete("http://localhost:5000/gardian/delelte/" + id).then((response) => {
+      axios.delete("http://localhost:5000/teacher/delete/" + id).then((response) => {
         console.log(response.data);
       });
 
       this.setState({
-        Event: this.state.Event.filter((el) => el._id !== id),
+        Teacher: this.state.Teacher.filter((el) => el._id !== id),
       });
     }
   }
 
-  EventList() {
-    return this.state.Event.map((currentEvent) => {
+  TeacherList() {
+    return this.state.Teacher.map((currentTeacher) => {
       return (
-        <Event
-          Event={currentEvent}
-          deleteEvent={this.deleteEvent}
-          key={currentEvent._id}
+        <Teacher
+          Teacher={currentTeacher}
+          deleteTeacher={this.deleteTeacher}
+          key={currentTeacher._id}
         />
       );
     });
   }
 
-  //searchKey by Event Name
-  filterData(Event, searchKey) {
+  //searchKey by Teacher Name
+  filterData(Teacher, searchKey) {
     this.setState({
-      Event: this.state.Event.filter((el) => (el.EventName = searchKey)),
+      Teacher: this.state.Teacher.filter((el) => (el.TeacherName = searchKey)),
     });
   }
 
   handleSearchArea = (e) => {
     const searchKey = e.currentTarget.value;
 
-    axios.get("http://localhost:5000/gardian").then((response) => {
+    axios.get("http://localhost:5000/teacher").then((response) => {
       const resultt = response.data;
       const result = resultt.filter((props) =>
-        props.EventName.includes(searchKey)
+        props.TeacherName.includes(searchKey)
       );
 
-      this.setState({ Event: result });
+      this.setState({ Teacher: result });
     });
   };
 
@@ -113,7 +113,7 @@ export default class EventList extends Component {
             <input
               className="form-control"
               type="search"
-              placeholder="Search by Gardian Name"
+              placeholder="Search by Teacher Name"
               name="searchQuery"
               onChange={this.handleSearchArea}
             ></input>{" "}
@@ -124,29 +124,29 @@ export default class EventList extends Component {
             <tr>
               <th> Teachers ID </th> <th> Teachers Name </th>{" "}
               <th> Age </th> {" "}
-              <th> Address </th> <th> Phone No </th>{" "}
-              <th> Child Names </th>
+              <th> Gender </th> <th> Address </th>{" "}
+              <th> Qualifications </th>
               <th> Actions </th>{" "}
             </tr>{" "}
           </thead>{" "}
           <tbody>
-            {this.state.Event.map((props) => (
+            {this.state.Teacher.map((props) => (
               <tr key={props.Tid}>
                 <td> {props.Tid} </td>
                 <td> {props.Name} </td>
                 <td> {props.Age} </td>
+                <td> {props.Gender} </td>
                 <td> {props.Address} </td>
-                <td> {props.Pno} </td>
-                <td> {props.Children} </td>
+                <td> {props.Qualification} </td>
                 <td>
-                  <Link to={"/gardian/edit/" + props._id}>
+                  <Link to={"/teacher/update/" + props._id}>
                     {" "}
                     <Button variant="warning btn-sm"> Edit </Button>{" "}
                   </Link>
                   <a
                     href=""
                     onClick={() => {
-                      this.deleteEvent(props._id);
+                      this.deleteTeacher(props._id);
                     }}
                   >
                     {" "}
@@ -158,7 +158,7 @@ export default class EventList extends Component {
           </tbody>{" "}
         </table>
         <div style={{ float: "right" }}>
-          <Link to="/gardian/create">
+          <Link to="/teacher/create">
             <button type="button" class="btn btn-success" variant="primary">
               New Teacher
             </button>

@@ -24,13 +24,13 @@ export default class EditTeacher extends Component {
       Address: "",
       Qualification: "",
       GroupNo: "",
-      Event: [],
+      Teacher: [],
     };
   }
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/gardian/" + this.props.match.params.id)
+      .get("http://localhost:5000/teacher/" + this.props.match.params.id)
       .then((response) => {
         this.setState({
           Tid: response.data.Tid,
@@ -39,7 +39,7 @@ export default class EditTeacher extends Component {
           Gender: response.data.Gender,
           Address: response.data.Address,
           Qualification: response.data.Qualification,
-          GroupNo: response.data.GroupNoPno,
+          GroupNo: response.data.GroupNo
         });
       })
       .catch(function (error) {
@@ -47,11 +47,11 @@ export default class EditTeacher extends Component {
       });
 
     axios
-      .get("http://localhost:5000/gardian")
+      .get("http://localhost:5000/teacher")
       .then((response) => {
         if (response.data.length > 0) {
           this.setState({
-            Event: response.data.map((Event) => Event.CompanyName),
+            Teacher: response.data.map((Teacher) => Teacher.CompanyName),
           });
         }
       })
@@ -112,7 +112,7 @@ export default class EditTeacher extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const Event = {
+    const Teacher = {
       Tid: this.state.Tid,
       Name: this.state.Name,
       Age: this.state.Age,
@@ -122,16 +122,16 @@ export default class EditTeacher extends Component {
       GroupNo: this.state.GroupNo,
     };
 
-    console.log(Event);
+    console.log(Teacher);
 
     axios
       .post(
-        "http://localhost:5000/gardian/update/" + this.props.match.params.id,
-        Event
+        "http://localhost:5000/teacher/update/" + this.props.match.params.id,
+        Teacher
       )
       .then((res) => console.log(res.data));
-    alert("Edit Successfully");
-    window.location = "/gardian";
+    alert("Edit Successfull");
+    window.location = "/teacher";
   }
 
   render() {
@@ -158,7 +158,7 @@ export default class EditTeacher extends Component {
                 <form onSubmit={this.onSubmit}>
 
                 <div className="form-group">
-                    <label> Techer ID: </label>
+                    <label> Teacher ID: </label>
                     <input
                       type="Number"
                       required
@@ -186,7 +186,7 @@ export default class EditTeacher extends Component {
                   <div className="form-group">
                     <label> Age : </label>
                     <input
-                      type="text"
+                      type="Number"
                       required
                       className="form-control"
                       placeholder="Enter age"
@@ -228,6 +228,7 @@ export default class EditTeacher extends Component {
                     <label> Qualifications : </label>
                     <input
                       type="text"
+                      required
                       className="form-control"
                       placeholder="Enter Qualifications"
                       value={this.Qualification}
@@ -238,9 +239,10 @@ export default class EditTeacher extends Component {
                   <div className="form-group">
                     <label> Group No : </label>
                     <input
-                      type="number"
+                      type="Number"
+                      required
                       className="form-control"
-                      placeholder="Enter Qualifications"
+                      placeholder="Enter Group"
                       value={this.Qualification}
                       onChange={this.onChangeGroupNo}
                     />{" "}
@@ -249,7 +251,7 @@ export default class EditTeacher extends Component {
                   <div className="form-group">
                     <input
                       type="submit"
-                      value="Create"
+                      value="Update"
                       className="btn btn-primary"
                     />
                   </div>{" "}

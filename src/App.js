@@ -5,12 +5,16 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from "./components/navbar.component";
 
 // Import files of gardian
-
 import EditEvent from "./components/edit-Event.component";
 import CreateEvent from "./components/create-Event.component";
 import EventList from "./components/Event-list.component";
 import Report from "./components/Report";
 
+
+// Import files for Teacher
+import EditTeacher from "./components/teacherComponent/edit-Teacher.component";
+import CreateTeacher from "./components/teacherComponent/create-Teacher.component";
+import TeacherList from "./components/teacherComponent/Teacher-list.component";
 
 function App() {
   return (
@@ -28,6 +32,10 @@ function App() {
         {/*Routes for Children */}
 
         {/*Routes for Teachers */}
+        <Route path="/teacher" component={TeacherList}/>;
+        <Route path="/teacher/update/:id" component={EditTeacher}/>;
+        <Route path="/teacher/create" component={CreateTeacher}/>;
+
 
         {/*Routes for Applications */}
 

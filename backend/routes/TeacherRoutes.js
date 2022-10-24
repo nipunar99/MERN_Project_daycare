@@ -25,7 +25,7 @@ router.route("/teacher/add").post((req,res)=>{
 })
 
 //UPDATE
-router.route("/update/:id").put((req,res) => {
+router.route("/teacher/update/:id").put((req,res) => {
     const teacherId = req.params.id;
     const {Tid,Name,Age,Gender,Address,Qualification,GroupNo} = req.body;
 
@@ -50,7 +50,7 @@ router.route("/update/:id").put((req,res) => {
 })
 
 //DELETE
-router.route("/delete/:id").delete((req,res)=>{
+router.route("/teacher/delete/:id").delete((req,res)=>{
     const teacherId = req.params.id;
 
     teacher.findByIdAndDelete(teacherId)

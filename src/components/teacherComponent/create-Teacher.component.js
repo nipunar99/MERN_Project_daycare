@@ -25,7 +25,7 @@ export default class AddTeacher extends Component {
       Address: "",
       Qualification: "",
       GroupNo: "",
-      Event: [],
+      Teacher: [],
     };
   }
 
@@ -83,7 +83,7 @@ export default class AddTeacher extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const Event = {
+    const Teacher = {
       Tid: this.state.Tid,
       Name: this.state.Name,
       Age: this.state.Age,
@@ -93,21 +93,21 @@ export default class AddTeacher extends Component {
       GroupNo: this.state.GroupNo,
     };
 
-    console.log(Event);
+    console.log(Teacher);
 
     //validation **************************************************************
 
     axios
-      .post("http://localhost:5000/gardian/add", Event)
+      .post("http://localhost:5000/teacher/add", Teacher)
       .then((res) => console.log(res.data));
 
     swal({
       title: "Done!",
-      text: "Event Successfully Added",
+      text: "Teacher Successfully Added",
       icon: "success",
       button: "Okay!",
     }).then((value) => {
-      window.location = "/gardian";
+      window.location = "/teacher";
     });
   }
 
@@ -136,7 +136,7 @@ export default class AddTeacher extends Component {
                 <form onSubmit={this.onSubmit}>
 
                   <div className="form-group">
-                    <label> Techer ID: </label>
+                    <label> Teacher ID: </label>
                     <input
                       type="Number"
                       required
@@ -164,7 +164,7 @@ export default class AddTeacher extends Component {
                   <div className="form-group">
                     <label> Age : </label>
                     <input
-                      type="text"
+                      type="Number"
                       required
                       className="form-control"
                       placeholder="Enter age"
@@ -216,7 +216,7 @@ export default class AddTeacher extends Component {
                   <div className="form-group">
                     <label> Group No : </label>
                     <input
-                      type="number"
+                      type="Number"
                       className="form-control"
                       placeholder="Enter Qualifications"
                       value={this.Qualification}
@@ -228,7 +228,7 @@ export default class AddTeacher extends Component {
                   <div className="form-group">
                     <input
                       type="submit"
-                      value="Create"
+                      value="Add"
                       className="btn btn-primary"
                     />
                   </div>{" "}
