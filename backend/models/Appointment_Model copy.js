@@ -7,11 +7,11 @@ const Schema = mongoose.Schema;
 const AppointmentSchema = new Schema(
   {
     Aid: { type: Number, required: true },
-    Name: { type: String, required: true },
-    Age: { type: String, required: true },
-    Address: { type: String, required: true },
-    Pno: { type: String, required: true },
-    Children: { type: String, required: true },
+    Date: { type: String, required: true },
+    StartTime: { type: String, required: true },
+    EndTime: { type: String, required: true },
+    Pid: { type: Number, required: true },
+    Cid: { type: Number, required: true },
   },
   {
     timestamps: true,

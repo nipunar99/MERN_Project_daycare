@@ -8,28 +8,49 @@ router.route("/appointment").get((req, res) => {
 });
 
 //Add Function
-router.route("/appointment/add").post((req, res) => {
-  const Aid = req.body.Aid;
-  const Name = req.body.Name;
-  const Age = req.body.Age;
-  const Address = req.body.Address;
-  const Pno = req.body.Pno;
-  const Children = req.body.Children;
+// router.route("/appointment/add").post((req, res) => {
+//   const Aid = req.body.Aid;
+//   const Date = req.body.Date;
+//   const StartTime = req.body.StartTime;
+//   const EndTime = req.body.EndTime;
+//   const Pid = req.body.Pid;
+//   const Cid = req.body.Cid;
+
+//   const newAppointment = new Appointment({
+//     Aid,
+//     Date,
+//     StartTime,
+//     EndTime,
+//     Pid,
+//     Cid,
+//   });
+
+//   newAppointment.save().then(()=>{
+//     res.json("Appointment  added!");
+//   }).catch((err) => {
+//     res.status(400).json("Error: " + err);
+//   });
+// })
+
+router.route("/appointment/add").post((req,res)=>{
+  const {Aid,Date,StartTime,EndTime,Pid,Cid} = req.body;
 
   const newAppointment = new Appointment({
-    Aid,
-    Name,
-    Age,
-    Address,
-    Pno,
-    Children,
+          Aid,
+          Date,
+          StartTime,
+          EndTime,
+          Pid,
+          Cid
   });
 
-  newAppointment
-    .save()
-    .then(() => res.json("Appointment  added!"))
-    .catch((err) => res.status(400).json("Error: " + err));
-});
+  newAppointment.save().then(()=>{
+      res.json("Appointment Added!");
+  }).catch((err)=>{
+      console.log(err);
+  })
+
+})
 
 // Get Data
 router.route("/appointment/:id").get((req, res) => {
@@ -52,17 +73,18 @@ router.route("/appointment/update/:id").post((req, res) => {
   Appointment.findById(req.params.id)
     .then((Appointment) => {
       Appointment.Aid = req.body.Aid;
-      Appointment.Name = req.body.Name;
-      Appointment.Age = req.body.Age;
-      Appointment.Address = req.body.Address;
-      Appointment.Pno = req.body.Pno;
-      Appointment.Children = req.body.Children;
+      Appointment.Date = req.body.Date;
+      Appointment.StartTime = req.body.StartTime;
+      Appointment.EndTime = req.bodyEndTimes;
+      Appointment.Pid = req.body.Pid;
+      Appointment.Cid = req.body.Cid;
       
       Appointment.save()
         .then(() => res.json("Appointment updated!"))
         .catch((err) => res.status(400).json("Error : " + err));
     })
     .catch((err) => res.status(400).json("Error : " + err));
-});
+})
+
 
 module.exports = router;

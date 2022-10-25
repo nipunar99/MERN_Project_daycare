@@ -7,20 +7,20 @@ export default class EditAppointment extends Component {
     super(props);
 
     this.onChangeAid = this.onChangeAid.bind(this);
-    this.onChangeDate = this.onChangeDate.bind(this);
-    this.onChangeStartTime = this.onChangeStartTime.bind(this);
-    this.onChangeEndTime = this.onChangeEndTime.bind(this);
-    this.onChangePid = this.onChangePid.bind(this);
-    this.onChangeCid = this.onChangeCid.bind(this);
+    this.onChangeName = this.onChangeName.bind(this);
+    this.onChangeAddress = this.onChangeAddress.bind(this);
+    this.onChangePno = this.onChangePno.bind(this);
+    this.onChangeChildren = this.onChangeChildren.bind(this);
+    this.onChangeAge = this.onChangeAge.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       Aid: "",
-      Date: "",
-      StartTime: "",
-      EndTime: "",
-      Pid: "",
-      Cid: "",
+      Name: "",
+      Age: "",
+      Address: "",
+      Pno: "",
+      Childres: "",
       Appointment: [],
     };
   }
@@ -31,11 +31,11 @@ export default class EditAppointment extends Component {
       .then((response) => {
         this.setState({
           Aid: response.data.Aid,
-          Date: response.data.Date,
-          StartTime: response.data.StartTime,
-          EndTime: response.data.EndTime,
-          Pid: response.data.Pid,
-          Cid: response.data.Cid,
+          Name: response.data.Name,
+          Age: response.data.Age,
+          Address: response.data.Address,
+          Pno: response.data.Pno,
+          Children: response.data.Children,
         });
       })
       .catch(function (error) {
@@ -55,8 +55,6 @@ export default class EditAppointment extends Component {
         console.log(error);
       });
   }
-
-
   //set the AppointmentID
   onChangeAid(e) {
     this.setState({
@@ -64,36 +62,36 @@ export default class EditAppointment extends Component {
     });
   }
 
-  //set the AppointmentDate
-  onChangeDate(e) {
+  //set the AppointmentName
+  onChangeName(e) {
     this.setState({
       Name: e.target.value,
     });
   }
 
-  //set Start Time
-  onChangeStartTime(e) {
+  //set Category
+  onChangeAddress(e) {
     this.setState({
       Address: e.target.value,
     });
   }
 
-  //set End Time
-  onChangeEndTime(e) {
+  //set Content
+  onChangePno(e) {
     this.setState({
       Pno: e.target.value,
     });
   }
 
-  //Set Parent ID
-  onChangePid(e) {
+  //Set Packages
+  onChangeChildren(e) {
     this.setState({
       Children: e.target.value,
     });
   }
 
-  //set Child ID
-  onChangeCid(e) {
+  //set age
+  onChangeAge(e) {
     this.setState({
       Age: e.target.value,
     });
@@ -105,11 +103,11 @@ export default class EditAppointment extends Component {
 
     const Appointment = {
       Aid: this.state.Aid,
-      Date: this.state.Date,
-      StartTime: this.state.StartTime,
-      EndTime: this.stateEndTimes,
-      Pid: this.state.Pid,
-      Cid: this.state.Cid,
+      Name: this.state.Name,
+      Age: this.state.Age,
+      Address: this.state.Address,
+      Pno: this.state.Pno,
+      Children: this.state.Children,
     };
 
     console.log(Appointment);
@@ -129,10 +127,9 @@ export default class EditAppointment extends Component {
       <div>
         <div class="row">
           <div class="col-6">
-            <br />
-            <br />
+            <br /> <br /> <br /> <br /> <br /> <br />
             <img
-              src="https://s3-eu-west-1.amazonaws.com/poptop-wp/blog/wp-content/uploads/2018/02/15113845/1st-shot-2.gif"
+              src="https://www.zestinfotech.in/wp-content/uploads/2020/07/acf1fs403asa627af854f143dfsc7f65f3efd7ddcf53ae.gif"
               width="90%"
               height="60% "
             />
@@ -143,82 +140,83 @@ export default class EditAppointment extends Component {
                 <div className="col-md-8 mt-4 mx-auto"> </div>
                 <h3 className="text-center">
                   <font face="Comic sans MS" size="6">
-                    Edit Appointment
+                    Edit Appointment Details
                   </font>{" "}
                 </h3>
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
-                    <label> Appointment ID: </label>
+                      <label> Appointment ID: </label>
+                      <input
+                        type="Number"
+                        required
+                        className="form-control"
+                        placeholder="Enter an ID"
+                        value={this.state.Aid}
+                        onChange={this.onChangeAid}
+                      />
+                    </div>
+                      <div className="form-group">
+                      <label> Name: </label>
+                      <input
+                        type="text"
+                        required
+                        className="form-control"
+                        placeholder="Enter Name"
+                        value={this.state.Name}
+                        onChange={this.onChangeName}
+                      />{" "}
+                    </div>
+                    <div className="form-group">
+                    <label> Age : </label>
                     <input
-                      type="Number"
+                      type="text"
                       required
                       className="form-control"
-                      placeholder="Enter an ID"
-                      value={this.state.Aid}
-                      onChange={this.onChangeAid}
+                      placeholder="Enter age"
+                      //maxlength = "10"
+                      value={this.state.Age}
+                      onChange={this.onChangeAge}
                     />
                   </div>
                   <div className="form-group">
-                    <label> Date: </label>
+                    <label> Address : </label>
                     <input
-                      type="Date"
+                      type="text"
                       required
                       className="form-control"
-                      placeholder="Enter Date"
-                      value={this.state.Date}
-                      onChange={this.onChangeDate}
+                      placeholder="Enter Address"
+                      //maxlength = "10"
+                      value={this.state.Address}
+                      onChange={this.onChangeAddress}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label> Phone Number: </label>
+                    <input
+                      type="text"
+                      required
+                      className="form-control"
+                      placeholder="Enter Phone number"
+                      //maxlength = "10"
+                      value={this.state.Pno}
+                      onChange={this.onChangePno}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label> Children Names : </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Children Names"
+                      value={this.Children}
+                      onChange={this.onChangeChildren}
                     />{" "}
                   </div>
-                  <div className="form-group">
-                    <label> Start Time : </label>
-                    <input
-                      type="text"
-                      required
-                      className="form-control"
-                      placeholder="Enter Start Time"
-                      //maxlength = "10"
-                      value={this.state.StartTime}
-                      onChange={this.onChangeStartTime}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label> EndTime : </label>
-                    <input
-                      type="text"
-                      required
-                      className="form-control"
-                      placeholder="Enter End Time"
-                      //maxlength = "10"
-                      value={this.state.EndTime}
-                      onChange={this.onChangeEndTime}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label> Parent ID: </label>
-                    <input
-                      type="Number"
-                      required
-                      className="form-control"
-                      placeholder="Enter Parent ID"
-                      //maxlength = "10"
-                      value={this.state.Pid}
-                      onChange={this.onChangePid}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label> Child ID : </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Enter Child ID"
-                      value={this.Cid}
-                      onChange={this.onChangeCid}
-                    />{" "}
-                  </div>
+                  
                   <div className="form-group">
                     <input
                       type="submit"
-                      value="Update"
+                      value="Create"
                       className="btn btn-primary"
                     />
                   </div>{" "}
@@ -229,6 +227,6 @@ export default class EditAppointment extends Component {
         </div>{" "}
         <br /> <br />
       </div>
-    )
+    );
   }
 }

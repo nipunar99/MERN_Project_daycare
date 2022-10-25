@@ -8,20 +8,20 @@ export default class CreateAppointment extends Component {
     super(props);
 
     this.onChangeAid = this.onChangeAid.bind(this);
-    this.onChangeDate = this.onChangeDate.bind(this);
-    this.onChangeStartTime = this.onChangeStartTime.bind(this);
-    this.onChangeEndTime = this.onChangeEndTime.bind(this);
-    this.onChangePid = this.onChangePid.bind(this);
-    this.onChangeCid = this.onChangeCid.bind(this);
+    this.onChangeName = this.onChangeName.bind(this);
+    this.onChangeAddress = this.onChangeAddress.bind(this);
+    this.onChangePno = this.onChangePno.bind(this);
+    this.onChangeChildren = this.onChangeChildren.bind(this);
+    this.onChangeAge = this.onChangeAge.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       Aid: "",
-      Date: "",
-      StartTime: "",
-      EndTime: "",
-      Pid: "",
-      Cid: "",
+      Name: "",
+      Age: "",
+      Address: "",
+      Pno: "",
+      Children: "",
       Appointment: [],
     };
   }
@@ -33,38 +33,38 @@ export default class CreateAppointment extends Component {
     });
   }
 
-  //set the AppointmentDate
-  onChangeDate(e) {
+  //set the AppointmentName
+  onChangeName(e) {
     this.setState({
-      Date: e.target.value,
+      Name: e.target.value,
     });
   }
 
-  //set Start Time
-  onChangeStartTime(e) {
+  //set Category
+  onChangeAddress(e) {
     this.setState({
-      StartTime: e.target.value,
+      Address: e.target.value,
     });
   }
 
-  //set End Time
-  onChangeEndTime(e) {
+  //set Content
+  onChangePno(e) {
     this.setState({
-      EndTime: e.target.value,
+      Pno: e.target.value,
     });
   }
 
-  //Set Parent ID
-  onChangePid(e) {
+  //Set Packages
+  onChangeChildren(e) {
     this.setState({
-      Pid: e.target.value,
+      Children: e.target.value,
     });
   }
 
-  //set Child ID
-  onChangeCid(e) {
+  //set Age
+  onChangeAge(e) {
     this.setState({
-      Cid: e.target.value,
+      Age: e.target.value,
     });
   }
 
@@ -74,11 +74,11 @@ export default class CreateAppointment extends Component {
 
     const Appointment = {
       Aid: this.state.Aid,
-      Date: this.state.Date,
-      StartTime: this.state.StartTime,
-      EndTime: this.stateEndTimes,
-      Pid: this.state.Pid,
-      Cid: this.state.Cid,
+      Name: this.state.Name,
+      Age: this.state.Age,
+      Address: this.state.Address,
+      Pno: this.state.Pno,
+      Children: this.state.Children,
     };
 
     console.log(Appointment);
@@ -134,61 +134,60 @@ export default class CreateAppointment extends Component {
                     />
                   </div>
                   <div className="form-group">
-                    <label> Date: </label>
+                    <label> Name: </label>
                     <input
-                      type="Date"
+                      type="text"
                       required
                       className="form-control"
-                      placeholder="Enter Date"
-                      value={this.state.Date}
-                      onChange={this.onChangeDate}
+                      placeholder="Enter Name"
+                      value={this.state.Name}
+                      onChange={this.onChangeName}
                     />{" "}
                   </div>
                   <div className="form-group">
-                    <label> Start Time : </label>
+                    <label> Age : </label>
                     <input
                       type="text"
                       required
                       className="form-control"
-                      placeholder="Enter Start Time"
+                      placeholder="Enter age"
                       //maxlength = "10"
-                      value={this.state.StartTime}
-                      onChange={this.onChangeStartTime}
+                      value={this.state.Age}
+                      onChange={this.onChangeAge}
                     />
                   </div>
                   <div className="form-group">
-                    <label> EndTime : </label>
+                    <label> Address : </label>
                     <input
                       type="text"
                       required
                       className="form-control"
-                      placeholder="Enter End Time"
+                      placeholder="Enter Address"
                       //maxlength = "10"
-                      value={this.state.EndTime}
-                      onChange={this.onChangeEndTime}
+                      value={this.state.Address}
+                      onChange={this.onChangeAddress}
                     />
                   </div>
                   <div className="form-group">
-                    <label> Parent ID: </label>
+                    <label> Phone Number: </label>
                     <input
-                      type="Number"
+                      type="text"
                       required
                       className="form-control"
-                      placeholder="Enter Parent ID"
+                      placeholder="Enter Phone number"
                       //maxlength = "10"
-                      value={this.state.Pid}
-                      onChange={this.onChangePid}
+                      value={this.state.Pno}
+                      onChange={this.onChangePno}
                     />
                   </div>
                   <div className="form-group">
-                    <label> Child ID : </label>
+                    <label> Children Names : </label>
                     <input
-                      type="Number"
-                      required
+                      type="text"
                       className="form-control"
-                      placeholder="Enter Child ID"
-                      value={this.Cid}
-                      onChange={this.onChangeCid}
+                      placeholder="Enter Children Names"
+                      value={this.Children}
+                      onChange={this.onChangeChildren}
                     />{" "}
                   </div>
                   <div className="form-group">
@@ -205,6 +204,6 @@ export default class CreateAppointment extends Component {
         </div>{" "}
         <br /> <br />
       </div>
-    )
+    );
   }
 }

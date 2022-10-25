@@ -5,9 +5,9 @@ import { Button } from "react-bootstrap";
 
 const Appointment = (props) => (
   <tr>
-    <td> {props.Appointment.Aid} </td> <td> {props.Appointment.Date} </td>{" "}
-    <td> {props.Appointment.StartTime} </td> <td> {props.Appointment.EndTime} </td>{" "}
-    <td> {props.Appointment.Pid} </td> <td> {props.Appointment.Cid} </td>{" "}
+    <td> {props.Appointment.Aid} </td> <td> {props.Appointment.Name} </td>{" "}
+    <td> {props.Appointment.Age} </td> <td> {props.Appointment.Address} </td>{" "}
+    <td> {props.Appointment.Pno} </td> <td> {props.Appointment.Children} </td>{" "}
     <td>
       <Link to={"/appointment/edit/" + props.Appointment._id}> Edit </Link> |{" "}
       <a
@@ -55,7 +55,9 @@ export default class AppointmentList extends Component {
   }
 
   deleteAppointment(id) {
-    if (window.confirm("Are you sure?")) {     
+    console.log("Aawaaaaaaaaa")
+    if (window.confirm("Are you sure?")) {
+     
       axios.delete("http://localhost:5000/appointment/delelte/"+id).then((response) => {
         console.log("DEleted "+response.data)
         console.log(response.data);
@@ -64,6 +66,7 @@ export default class AppointmentList extends Component {
       this.setState({
         Appointment: this.state.Appointment.filter((el) => el._id !== id),
       });
+      alert("Aawaaaaaaaaa mekeeee")
     }
   }
 
@@ -120,10 +123,10 @@ export default class AppointmentList extends Component {
         <table class="table table-bordered table-white">
           <thead className="thead-light">
             <tr>
-              <th> Appointment ID </th> <th> Appointment Date </th>{" "}
-              <th> Start Time </th> {" "}
-              <th> End Time </th> <th> Parent Id </th>{" "}
-              <th> Child Id </th>
+              <th> Appointment ID </th> <th> Appointment Name </th>{" "}
+              <th> Age </th> {" "}
+              <th> Address </th> <th> Phone No </th>{" "}
+              <th> Child Names </th>
               <th> Actions </th>{" "}
             </tr>{" "}
           </thead>{" "}
@@ -131,11 +134,11 @@ export default class AppointmentList extends Component {
             {this.state.Appointment.map((props) => (
               <tr key={props.Aid}>
                 <td> {props.Aid} </td>
-                <td> {props.Date} </td>
-                <td> {props.StartTime} </td>
-                <td> {props.EndTime} </td>
-                <td> {props.Pid} </td>
-                <td> {props.Cid} </td>
+                <td> {props.Name} </td>
+                <td> {props.Age} </td>
+                <td> {props.Address} </td>
+                <td> {props.Pno} </td>
+                <td> {props.Children} </td>
                 <td>
                   <Link to={"/appointment/edit/" + props._id}>
                     {" "}
