@@ -20,7 +20,7 @@ export default class EditEvent extends Component {
       Age: "",
       Address: "",
       Pno: "",
-      Childres: "",
+      Children: "",
       Event: [],
     };
   }
@@ -35,7 +35,7 @@ export default class EditEvent extends Component {
           Age: response.data.Age,
           Address: response.data.Address,
           Pno: response.data.Pno,
-          Children: response.data.Children,
+          Children: response.data.Children
         });
       })
       .catch(function (error) {

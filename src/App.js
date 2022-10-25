@@ -5,20 +5,17 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from "./components/navbar.component";
 
 // Import files of gardian
-import EditEvent from "./components/edit-Event.component";
-import CreateEvent from "./components/create-Event.component";
-import EventList from "./components/Event-list.component";
+import EditEvent from "./components/gardianComponents/edit-Event.component";
+import CreateEvent from "./components/gardianComponents/create-Event.component";
+import EventList from "./components/gardianComponents/Event-list.component";
 import Report from "./components/Report";
 
-
 //Import appoinment 
-import AppointmentList from "./components/appointment-list.component";
-import EditAppointment from "./components/edit-appointment.component";
-import CreateAppointment from "./components/create-appointment.component";
-
+import AppointmentList from "./components/appointmentComponents/appointment-list.component";
+import EditAppointment from "./components/appointmentComponents/edit-appointment.component";
+import CreateAppointment from "./components/appointmentComponents/create-appointment.component";
 
 // Import files of Child
-
 import EditChild from "./components/childComponents/editChild.component";
 import AddChild from "./components/childComponents/addChild.component";
 import ListChild from "./components/childComponents/listChild.component";
@@ -27,6 +24,8 @@ import ListChild from "./components/childComponents/listChild.component";
 import EditTeacher from "./components/teacherComponent/edit-Teacher.component";
 import CreateTeacher from "./components/teacherComponent/create-Teacher.component";
 import TeacherList from "./components/teacherComponent/Teacher-list.component";
+
+
 
 function App() {
   return (
@@ -47,9 +46,9 @@ function App() {
         <Route path="/child/create" component={AddChild}/>
 
         {/*Routes for Teachers */}
-        <Route path="/teacher" component={TeacherList}/>;
-        <Route path="/teacher/update/:id" component={EditTeacher}/>;
-        <Route path="/teacher/create" component={CreateTeacher}/>;
+        <Route path="/teacher" component={TeacherList}/>
+        <Route path="/teacher/update/:id" component={EditTeacher}/>
+        <Route path="/teacher/create" component={CreateTeacher}/>
 
 
         {/*Routes for Applications */}

@@ -25,19 +25,20 @@ router.route("/child/add").post((req,res)=>{
 })
 
 //UPDATE
+
 router.route("/child/update/:id").post((req, res) => {
-    Guardian.findById(req.params.id)
-      .then((Event) => {
-        Event.Cid = req.body.Gid;
-        Event.Name = req.body.Name;
-        Event.Age = req.body.Age;
-        Event.Gender = req.body.Gender;
-        Event.Address = req.body.Address;
-        Event.SpecialNotes = req.body.SpecialNotes;
-        Event.Gid = req.body.Gid;
+    child.findById(req.params.id)
+      .then((child) => {
+        child.Cid = req.body.Cid;
+        child.Name = req.body.Name;
+        child.Age = req.body.Age;
+        child.Gender = req.body.Gender;
+        child.Address = req.body.Address;
+        child.SpecialNotes = req.body.SpecialNotes;
+        child.Gid = req.body.Gid;
         
-        Event.save()
-          .then(() => res.json("Event updated!"))
+        child.save()
+          .then(() => res.json("Event updated! "+child))
           .catch((err) => res.status(400).json("Error : " + err));
       })
       .catch((err) => res.status(400).json("Error : " + err));

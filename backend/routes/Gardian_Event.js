@@ -27,14 +27,14 @@ router.route("/gardian/add").post((req, res) => {
 
   newEvent
     .save()
-    .then(() => res.json("Event  added!"))
+    .then(() => res.json("Guardian  added!"))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
 // Get Data
 router.route("/gardian/:id").get((req, res) => {
   Guardian.findById(req.params.id)
-    .then((Event) => res.json(Event))
+    .then((Guardian) => res.json(Guardian))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
@@ -42,23 +42,23 @@ router.route("/gardian/:id").get((req, res) => {
 
 router.route("/gardian/delelte/:id").delete((req, res) => {
   Guardian.findByIdAndDelete(req.params.id)
-    .then(() => res.json("Event deleted."))
+    .then(() => res.json("Guardian deleted."))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
 // Update data
 router.route("/gardian/update/:id").post((req, res) => {
   Guardian.findById(req.params.id)
-    .then((Event) => {
-      Event.Gid = req.body.Gid;
-      Event.Name = req.body.Name;
-      Event.Age = req.body.Age;
-      Event.Address = req.body.Address;
-      Event.Pno = req.body.Pno;
-      Event.Children = req.body.Children;
+    .then((Guardian) => {
+      Guardian.Gid = req.body.Gid;
+      Guardian.Name = req.body.Name;
+      Guardian.Age = req.body.Age;
+      Guardian.Address = req.body.Address;
+      Guardian.Pno = req.body.Pno;
+      Guardian.Children = req.body.Children;
       
-      Event.save()
-        .then(() => res.json("Event updated!"))
+      Guardian.save()
+        .then(() => res.json("Guardian updated!"))
         .catch((err) => res.status(400).json("Error : " + err));
     })
     .catch((err) => res.status(400).json("Error : " + err));
