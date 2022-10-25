@@ -4,11 +4,11 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Navbar from "./components/navbar.component";
 
+import Home from "./components/Home";
 // Import files of gardian
 import EditEvent from "./components/gardianComponents/edit-Event.component";
 import CreateEvent from "./components/gardianComponents/create-Event.component";
 import EventList from "./components/gardianComponents/Event-list.component";
-import Report from "./components/Report";
 
 //Import appoinment 
 import AppointmentList from "./components/appointmentComponents/appointment-list.component";
@@ -30,15 +30,15 @@ import TeacherList from "./components/teacherComponent/Teacher-list.component";
 function App() {
   return (
     <Router>
-      <div className="container">
+      <div>
         <Navbar />
         <br />
+        <Route path="/" exact component={Home} />
 
         {/*Routes for gardian */}
         <Route path="/gardian" component={EventList} />
         <Route path="/gardian/edit/:id" component={EditEvent} />
         <Route path="/gardian/create" component={CreateEvent} />
-        <Route path="/gardian/Report" component={Report} />
 
         {/*Routes for Children */}
         <Route path="/child" component={ListChild}/>

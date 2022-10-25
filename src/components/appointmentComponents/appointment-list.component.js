@@ -55,7 +55,6 @@ export default class AppointmentList extends Component {
   }
 
   deleteAppointment(id) {
-    console.log("Aawaaaaaaaaa")
     if (window.confirm("Are you sure?")) {
      
       axios.delete("http://localhost:5000/appointment/delelte/"+id).then((response) => {
@@ -66,7 +65,7 @@ export default class AppointmentList extends Component {
       this.setState({
         Appointment: this.state.Appointment.filter((el) => el._id !== id),
       });
-      alert("Aawaaaaaaaaa mekeeee")
+      alert("Deleted")
     }
   }
 
@@ -123,10 +122,10 @@ export default class AppointmentList extends Component {
         <table class="table table-bordered table-white">
           <thead className="thead-light">
             <tr>
-              <th> Appointment ID </th> <th> Appointment Name </th>{" "}
-              <th> Age </th> {" "}
-              <th> Address </th> <th> Phone No </th>{" "}
-              <th> Child Names </th>
+              <th> Appointment ID </th> <th> Date </th>{" "}
+              <th> Address </th> {" "}
+              <th> Arrived Time</th> <th> Depature Time </th>{" "}
+              <th> Child Name </th>
               <th> Actions </th>{" "}
             </tr>{" "}
           </thead>{" "}

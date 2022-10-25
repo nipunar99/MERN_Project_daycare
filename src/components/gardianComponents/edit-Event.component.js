@@ -124,16 +124,8 @@ export default class EditEvent extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <div class="row">
-          <div class="col-6">
-            <br /> <br /> <br /> <br /> <br /> <br />
-            <img
-              src="https://www.zestinfotech.in/wp-content/uploads/2020/07/acf1fs403asa627af854f143dfsc7f65f3efd7ddcf53ae.gif"
-              width="90%"
-              height="60% "
-            />
-          </div>{" "}
           <div class="col-6">
             <div class="myformstyle2">
               <div className="card-body">

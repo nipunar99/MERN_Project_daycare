@@ -124,16 +124,8 @@ export default class EditAppointment extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <div class="row">
-          <div class="col-6">
-            <br /> <br /> <br /> <br /> <br /> <br />
-            <img
-              src="https://www.zestinfotech.in/wp-content/uploads/2020/07/acf1fs403asa627af854f143dfsc7f65f3efd7ddcf53ae.gif"
-              width="90%"
-              height="60% "
-            />
-          </div>{" "}
           <div class="col-6">
             <div class="myformstyle2">
               <div className="card-body">
@@ -150,64 +142,64 @@ export default class EditAppointment extends Component {
                         type="Number"
                         required
                         className="form-control"
-                        placeholder="Enter an ID"
+                        placeholder="Enter an Appointment ID"
                         value={this.state.Aid}
                         onChange={this.onChangeAid}
                       />
                     </div>
                       <div className="form-group">
-                      <label> Name: </label>
+                      <label> Date: </label>
                       <input
                         type="text"
                         required
                         className="form-control"
-                        placeholder="Enter Name"
+                        placeholder="Enter Date"
                         value={this.state.Name}
                         onChange={this.onChangeName}
                       />{" "}
                     </div>
                     <div className="form-group">
-                    <label> Age : </label>
-                    <input
-                      type="text"
-                      required
-                      className="form-control"
-                      placeholder="Enter age"
-                      //maxlength = "10"
-                      value={this.state.Age}
-                      onChange={this.onChangeAge}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label> Address : </label>
+                    <label> Address: </label>
                     <input
                       type="text"
                       required
                       className="form-control"
                       placeholder="Enter Address"
                       //maxlength = "10"
+                      value={this.state.Age}
+                      onChange={this.onChangeAge}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label> Arrived time: </label>
+                    <input
+                      type="text"
+                      required
+                      className="form-control"
+                      placeholder="Enter Arrived time"
+                      //maxlength = "10"
                       value={this.state.Address}
                       onChange={this.onChangeAddress}
                     />
                   </div>
                   <div className="form-group">
-                    <label> Phone Number: </label>
+                    <label> Depature time: </label>
                     <input
                       type="text"
                       required
                       className="form-control"
-                      placeholder="Enter Phone number"
+                      placeholder="Enter Depature time"
                       //maxlength = "10"
                       value={this.state.Pno}
                       onChange={this.onChangePno}
                     />
                   </div>
                   <div className="form-group">
-                    <label> Children Names : </label>
+                    <label> Children Name: </label>
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="Enter Children Names"
+                      placeholder="Enter Children Name"
                       value={this.Children}
                       onChange={this.onChangeChildren}
                     />{" "}

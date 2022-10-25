@@ -101,17 +101,8 @@ export default class CreateEvent extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <div class="row">
-          <div class="col-6">
-            <br />
-            <br />
-            <img
-              src="https://s3-eu-west-1.amazonaws.com/poptop-wp/blog/wp-content/uploads/2018/02/15113845/1st-shot-2.gif"
-              width="90%"
-              height="60% "
-            />
-          </div>{" "}
           <div class="col-6">
             <div class="myformstyle2">
               <div className="card-body">
