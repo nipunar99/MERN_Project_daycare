@@ -105,13 +105,13 @@ export default class EventList extends Component {
         <div style={{ float: "none" }}></div> <br />
         <div className="row">
           <div className="col-lg-9 mt-2 mb-2">
-            <h4> All Gardians </h4>{" "}
+            <h4> All Guardians </h4>{" "}
           </div>{" "}
           <div className="col-lg-3 mt-2 mb-2">
             <input
               className="form-control"
               type="search"
-              placeholder="Search by Gardian Name"
+              placeholder="Search by Guardian Name"
               name="searchQuery"
               onChange={this.handleSearchArea}
             ></input>{" "}
@@ -120,7 +120,7 @@ export default class EventList extends Component {
         <table class="table table-bordered table-white">
           <thead className="thead-light">
             <tr>
-              <th> Gardian ID </th> <th> Gardian Name </th>{" "}
+              <th> Guardian ID </th> <th> Guardian Name </th>{" "}
               <th> Age </th> {" "}
               <th> Address </th> <th> Phone No </th>{" "}
               <th> Child Names </th>
@@ -158,7 +158,7 @@ export default class EventList extends Component {
         <div style={{ float: "right" }}>
           <Link to="/gardian/create">
             <button type="button" class="btn btn-success" variant="primary">
-              New Event
+              Add a Guardian
             </button>
           </Link>
         </div>

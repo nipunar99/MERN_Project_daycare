@@ -9,7 +9,7 @@ export default class Home extends Component {
             <div className="buttonPack">
                 <Link to={"/gardian"}>
                         {" "}
-                        <a className="btn"> Gardians </a>{" "}
+                        <a className="btn"> Guardians </a>{" "}
                 </Link>
 
                 <Link to={"/child"}>

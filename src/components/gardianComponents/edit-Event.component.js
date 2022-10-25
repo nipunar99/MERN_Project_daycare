@@ -132,12 +132,12 @@ export default class EditEvent extends Component {
                 <div className="col-md-8 mt-4 mx-auto"> </div>
                 <h3 className="text-center">
                   <font face="Comic sans MS" size="6">
-                    Edit Gardian Details
+                    Edit Guardian Details
                   </font>{" "}
                 </h3>
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
-                      <label> Gardian ID : </label>
+                      <label> Guardian ID : </label>
                       <input
                         type="Number"
                         required

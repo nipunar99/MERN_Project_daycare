@@ -19,7 +19,7 @@ export default class Navbar extends Component {
                 </li>
                 
                 <li className="nav-item">
-                  <a className="nav-link" href="/gardian"><b>Gardians </b></a>
+                  <a className="nav-link" href="/gardian"><b>Guardians </b></a>
                 </li>
 
                 <li className="nav-item">
