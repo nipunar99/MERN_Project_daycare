@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default class EditEvent extends Component {
+export default class EditChild extends Component {
   constructor(props) {
     super(props);
 

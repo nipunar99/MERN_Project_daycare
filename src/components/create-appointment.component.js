@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
-import swal from "@sweetalert/with-react"
+import swal from "@sweetalert/with-react";
 
-export default class AddChild extends Component {
+export default class CreateAppointment extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeCid = this.onChangeCid.bind(this);
+    this.onChangeAid = this.onChangeAid.bind(this);
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeAddress = this.onChangeAddress.bind(this);
     this.onChangePno = this.onChangePno.bind(this);
@@ -16,24 +16,24 @@ export default class AddChild extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      Cid: "",
+      Aid: "",
       Name: "",
       Age: "",
       Address: "",
       Pno: "",
       Childres: "",
-      Event: [],
+      Appointment: [],
     };
   }
 
-  //set the EventID
-  onChangeCid(e) {
+  //set the AppointmentID
+  onChangeAid(e) {
     this.setState({
-      Cid: e.target.value,
+      Aid: e.target.value,
     });
   }
 
-  //set the EventName
+  //set the AppointmentName
   onChangeName(e) {
     this.setState({
       Name: e.target.value,
@@ -72,8 +72,8 @@ export default class AddChild extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const Event = {
-      Cid: this.state.Cid,
+    const Appointment = {
+      Aid: this.state.Aid,
       Name: this.state.Name,
       Age: this.state.Age,
       Address: this.state.Address,
@@ -81,21 +81,21 @@ export default class AddChild extends Component {
       Children: this.state.Children,
     };
 
-    console.log(Event);
+    console.log(Appointment);
 
     //validation **************************************************************
 
     axios
-      .post("http://localhost:5000/child/add", Event)
+      .post("http://localhost:5000/appointment/add", Appointment)
       .then((res) => console.log(res.data));
 
     swal({
       title: "Done!",
-      text: "Event Successfully Added",
+      text: "Appointment Successfully Added",
       icon: "success",
       button: "Okay!",
     }).then((value) => {
-      window.location = "/child";
+      window.location = "/appointment";
     });
   }
 
@@ -118,19 +118,19 @@ export default class AddChild extends Component {
                 <div className="col-md-8 mt-4 mx-auto"> </div>
                 <h3 className="text-center">
                   <font face="Comic sans MS" size="6">
-                    Add a child
+                    Add a Appointment
                   </font>{" "}
                 </h3>
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
-                    <label> Gardian ID: </label>
+                    <label> Appointment ID: </label>
                     <input
                       type="Number"
                       required
                       className="form-control"
                       placeholder="Enter an ID"
-                      value={this.state.Cid}
-                      onChange={this.onChangeCid}
+                      value={this.state.Aid}
+                      onChange={this.onChangeAid}
                     />
                   </div>
                   <div className="form-group">

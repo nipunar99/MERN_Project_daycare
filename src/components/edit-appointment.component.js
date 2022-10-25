@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
-import swal from "@sweetalert/with-react"
 
-export default class AddChild extends Component {
+export default class EditAppointment extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeCid = this.onChangeCid.bind(this);
+    this.onChangeAid = this.onChangeAid.bind(this);
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeAddress = this.onChangeAddress.bind(this);
     this.onChangePno = this.onChangePno.bind(this);
@@ -16,24 +15,54 @@ export default class AddChild extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      Cid: "",
+      Aid: "",
       Name: "",
       Age: "",
       Address: "",
       Pno: "",
       Childres: "",
-      Event: [],
+      Appointment: [],
     };
   }
 
-  //set the EventID
-  onChangeCid(e) {
+  componentDidMount() {
+    axios
+      .get("http://localhost:5000/appointment/" + this.props.match.params.id)
+      .then((response) => {
+        this.setState({
+          Aid: response.data.Aid,
+          Name: response.data.Name,
+          Age: response.data.Age,
+          Address: response.data.Address,
+          Pno: response.data.Pno,
+          Children: response.data.Children,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    axios
+      .get("http://localhost:5000/appointment")
+      .then((response) => {
+        if (response.data.length > 0) {
+          this.setState({
+            Appointment: response.data.map((Appointment) => Appointment.CompanyName),
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  //set the AppointmentID
+  onChangeAid(e) {
     this.setState({
-      Cid: e.target.value,
+      Aid: e.target.value,
     });
   }
 
-  //set the EventName
+  //set the AppointmentName
   onChangeName(e) {
     this.setState({
       Name: e.target.value,
@@ -61,7 +90,7 @@ export default class AddChild extends Component {
     });
   }
 
-  //set Age
+  //set age
   onChangeAge(e) {
     this.setState({
       Age: e.target.value,
@@ -72,8 +101,8 @@ export default class AddChild extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const Event = {
-      Cid: this.state.Cid,
+    const Appointment = {
+      Aid: this.state.Aid,
       Name: this.state.Name,
       Age: this.state.Age,
       Address: this.state.Address,
@@ -81,22 +110,16 @@ export default class AddChild extends Component {
       Children: this.state.Children,
     };
 
-    console.log(Event);
-
-    //validation **************************************************************
+    console.log(Appointment);
 
     axios
-      .post("http://localhost:5000/child/add", Event)
+      .post(
+        "http://localhost:5000/appointment/update/" + this.props.match.params.id,
+        Appointment
+      )
       .then((res) => console.log(res.data));
-
-    swal({
-      title: "Done!",
-      text: "Event Successfully Added",
-      icon: "success",
-      button: "Okay!",
-    }).then((value) => {
-      window.location = "/child";
-    });
+    alert("Edit Successfully");
+    window.location = "/appointment";
   }
 
   render() {
@@ -104,10 +127,9 @@ export default class AddChild extends Component {
       <div>
         <div class="row">
           <div class="col-6">
-            <br />
-            <br />
+            <br /> <br /> <br /> <br /> <br /> <br />
             <img
-              src="https://s3-eu-west-1.amazonaws.com/poptop-wp/blog/wp-content/uploads/2018/02/15113845/1st-shot-2.gif"
+              src="https://www.zestinfotech.in/wp-content/uploads/2020/07/acf1fs403asa627af854f143dfsc7f65f3efd7ddcf53ae.gif"
               width="90%"
               height="60% "
             />
@@ -118,33 +140,33 @@ export default class AddChild extends Component {
                 <div className="col-md-8 mt-4 mx-auto"> </div>
                 <h3 className="text-center">
                   <font face="Comic sans MS" size="6">
-                    Add a child
+                    Edit Appointment Details
                   </font>{" "}
                 </h3>
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
-                    <label> Gardian ID: </label>
-                    <input
-                      type="Number"
-                      required
-                      className="form-control"
-                      placeholder="Enter an ID"
-                      value={this.state.Cid}
-                      onChange={this.onChangeCid}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label> Name: </label>
-                    <input
-                      type="text"
-                      required
-                      className="form-control"
-                      placeholder="Enter Name"
-                      value={this.state.Name}
-                      onChange={this.onChangeName}
-                    />{" "}
-                  </div>
-                  <div className="form-group">
+                      <label> Appointment ID: </label>
+                      <input
+                        type="Number"
+                        required
+                        className="form-control"
+                        placeholder="Enter an ID"
+                        value={this.state.Aid}
+                        onChange={this.onChangeAid}
+                      />
+                    </div>
+                      <div className="form-group">
+                      <label> Name: </label>
+                      <input
+                        type="text"
+                        required
+                        className="form-control"
+                        placeholder="Enter Name"
+                        value={this.state.Name}
+                        onChange={this.onChangeName}
+                      />{" "}
+                    </div>
+                    <div className="form-group">
                     <label> Age : </label>
                     <input
                       type="text"
@@ -190,6 +212,7 @@ export default class AddChild extends Component {
                       onChange={this.onChangeChildren}
                     />{" "}
                   </div>
+                  
                   <div className="form-group">
                     <input
                       type="submit"

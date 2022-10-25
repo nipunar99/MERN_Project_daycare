@@ -145,7 +145,7 @@ export default class EditEvent extends Component {
                 </h3>
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
-                      <label> Gardian ID: </label>
+                      <label> Gardian ID : </label>
                       <input
                         type="Number"
                         required
@@ -156,7 +156,7 @@ export default class EditEvent extends Component {
                       />
                     </div>
                       <div className="form-group">
-                      <label> Name: </label>
+                      <label> Name : </label>
                       <input
                         type="text"
                         required
